@@ -40,14 +40,8 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 
 // Get all the courses
-app.get("/api/courses", async (req, res) => {
-  try {
-    const allCourses = await pool.query("SELECT * FROM courses");
-    res.json(allCourses.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
+app.use("/api/courses", require("./routes/courseRoutes"));
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
