@@ -39,7 +39,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 // // Login User
 // app.use("/api/auth", require("./routes/authRoutes"));
 
-// Get all the courses
+// Get all the courses and course by ID
 app.use("/api/courses", require("./routes/courseRoutes"));
 
 // // Get a course by ID
