@@ -39,11 +39,24 @@ app.use("/api/auth", require("./routes/authRoutes"));
 // // Login User
 // app.use("/api/auth", require("./routes/authRoutes"));
 
+app.get("/api/courses/search", async (req, res) => {
+  try {
+    const { term } = req.query;
+    // console.log("term", term);
+    const courses = await pool.query(
+      "SELECT * FROM courses WHERE title ILIKE $1 OR $1 = ANY(tags)",
+      [`%${term}%`] // Search for the term in the title or tags
+    );
+    res.status(200).json(courses.rows);
+  } catch (error) {
+    console.error("Error fetching courses:", error);
+  }
+});
+
 // Get all the courses and course by ID
 app.use("/api/courses", require("./routes/courseRoutes"));
 
-// // Get a course by ID
-// app.use("/api/courses", require("./routes/courseRoutes"));
+// get a course based on search term
 
 // Get a lesson
 app.use("/api/lessons", require("./routes/lessonRoutes"));
