@@ -33,21 +33,23 @@ app.get("/healthz", (req, res) => {
   res.status(200).json("Systems up & running");
 });
 
-// Register User
+// Register/ Login User
 app.use("/api/auth", require("./routes/authRoutes"));
 
-// Login User
-app.use("/api/auth", require("./routes/authRoutes"));
+// // Login User
+// app.use("/api/auth", require("./routes/authRoutes"));
 
 // Get all the courses
 app.use("/api/courses", require("./routes/courseRoutes"));
 
-// Get a course by ID
-app.use("/api/courses", require("./routes/courseRoutes"));
-
+// // Get a course by ID
+// app.use("/api/courses", require("./routes/courseRoutes"));
 
 // Get a lesson
 app.use("/api/lessons", require("./routes/lessonRoutes"));
+
+// Get all the enrollments
+app.use("/api/enrollments", require("./routes/enrollmentRoutes"));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
