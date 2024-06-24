@@ -42,14 +42,21 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.get("/api/courses/search", async (req, res) => {
   try {
     const { term } = req.query;
-    // console.log("term", term);
+    const searchTerm = `%${term}%`;
     const courses = await pool.query(
-      "SELECT * FROM courses WHERE title ILIKE $1 OR $1 = ANY(tags)",
-      [`%${term}%`] // Search for the term in the title or tags
+      `SELECT * FROM courses 
+       WHERE title ILIKE $1 
+       OR EXISTS (
+         SELECT 1 
+         FROM unnest(tags) AS tag 
+         WHERE tag ILIKE $1
+       )`,
+      [searchTerm]
     );
     res.status(200).json(courses.rows);
   } catch (error) {
     console.error("Error fetching courses:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
