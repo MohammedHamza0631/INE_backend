@@ -41,7 +41,7 @@ INSERT INTO users (username, password, email) VALUES
 
 -- Insert sample values into Courses Table
 INSERT INTO courses (title, summary, cover, tags) VALUES
-('React Basics', 'A course on the basics of React.', 'cover1.jpg', ARRAY['React', 'Frontend']),
+('React Basics', 'A course on the basics of React.', 'sh3vijofdbmvl0sfra0d', ARRAY['React', 'Frontend']),
 ('Next.js Guide', 'Learn Next.js from scratch.', 'cover2.jpg', ARRAY['Next.js', 'Framework']),
 ('PostgreSQL Mastery', 'Master PostgreSQL for database management.', 'cover3.jpg', ARRAY['PostgreSQL', 'Database']);
 
